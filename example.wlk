@@ -1,6 +1,7 @@
 object envio{
   var property estaPago = false
   var property mensajero = roberto 
+  var property tipoPaquete = paqueteOriginal
   method puedeEnviarse(destino) = self.estaPago() && destino.puedePasar(mensajero)
 }
 
@@ -40,7 +41,7 @@ object camion{
 }
 
 object empresa{
-  const property mensajeros = [neo, chuck]
+  const property mensajeros = [chuck, roberto, neo]
   method contratar(mensajero){
     mensajeros.add(mensajero)
   }
@@ -55,5 +56,22 @@ object empresa{
     return destino.puedePasar(mensajeros.first())
   }
   method pesoDelUltimo() = mensajeros.last().peso()
+  method sePuedeEnviar(destino) = mensajeros.any({e => destino.puedePasar(e)})
+  method todosPuedenEnviar(destino) = mensajeros.all({e => destino.puedePasar(e)})
+}
 
+object paquetito{
+ const property precio = 0
+}
+
+object paquetonViajero{
+  const destinos = []
+  const property precio = 100 * destinos.size()
+  method agregarDestino(destino){
+    destinos.add(destino)
+  }
+}
+
+object paqueteOriginal{
+  const property precio = 50
 }
