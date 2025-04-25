@@ -17,4 +17,29 @@ describe "Pruebas de envio" {
     envio.estaPago(false)
     assert.that(not (envio.puedeEnviarse(laMatrix)))
   }
+  test"Agregar mensajero" {
+    empresa.contratar(roberto)
+    assert.equals([neo, chuck, roberto], empresa.mensajeros())
+  }
+  test "despedir empleado" {
+    empresa.despedir(neo)
+    assert.equals([chuck], empresa.mensajeros())
+  } 
+  test "vaciar empresa" {
+    empresa.despedirTodos()
+    assert.equals([], empresa.mensajeros())
+  }
+  test "la empresa es grande"{
+    empresa.contratar(roberto)
+    assert.that(empresa.mensajeriaEsGrande())
+  }
+  test "Consultar si el paquete puede ser entregado por el primer empleado de la la empresa de mensajería" {
+    empresa.contratar(roberto)
+    assert.that(empresa.paquetePuedeEntregarsePorElPrimero(puenteDeBrooklyn))
+  }
+
+  test "Saber el peso del último mensajero de la empresa."{
+    empresa.contratar(roberto)
+    assert.equals(95, empresa.mensajeros().last().peso())
+  }
 }

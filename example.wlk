@@ -13,10 +13,10 @@ object laMatrix{
 }
 
 object roberto{
-  var property pesoFisico = 0
+  var property pesoFisico = 90
   method peso() = pesoFisico + vehiculo.peso()
   var property vehiculo = bicicleta
-  var property puedeLlamar = false
+  var property puedeLlamar = true
 }
 
 object chuck{
@@ -25,7 +25,7 @@ object chuck{
 }
 
 object neo{
-  var property peso = 0
+  var property peso = 70
   var property tieneCredito = true
   var property puedeLlamar = self.tieneCredito()
 }
@@ -37,5 +37,23 @@ object bicicleta{
 object camion{
   var property acoplado = 1
   const property peso = 500 * acoplado
+}
+
+object empresa{
+  const property mensajeros = [neo, chuck]
+  method contratar(mensajero){
+    mensajeros.add(mensajero)
+  }
+  method despedir(mensajero){
+    mensajeros.remove(mensajero)
+  }
+  method despedirTodos(){
+    mensajeros.clear()
+  }
+  method mensajeriaEsGrande() = (mensajeros.size() > 2)
+  method paquetePuedeEntregarsePorElPrimero(destino){
+    return destino.puedePasar(mensajeros.first())
+  }
+  method pesoDelUltimo() = mensajeros.last().peso()
 
 }
